@@ -10,6 +10,7 @@
 #' @param x First numeric vector
 #' @param y Second numeric vector
 #' @param method Correlation method: "pearson", "spearman", "kendall"
+#' @param na_handle Method of dealing with NA value: "Complete", "Mean"
 #' @return Correlation coefficient
 #' @export
 cor_new = function(x, y, method = "pearson", na_handle = "mean") {

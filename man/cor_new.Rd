@@ -12,6 +12,8 @@ cor_new(x, y, method = "pearson", na_handle = "mean")
 \item{y}{Second numeric vector}
 
 \item{method}{Correlation method: "pearson", "spearman", "kendall"}
+
+\item{na_handle}{Method of dealing with NA value: "Complete", "Mean"}
 }
 \value{
 Correlation coefficient
