@@ -27,7 +27,7 @@ efficient_corr_matrix = function(data, method = "pearson") {
   corr_matrix_melted = reshape2::melt(corr_matrix)
 
   # draw heatplot
-  ggplot2::ggplot(data = corr_matrix_melted, ggplot2::aes(x = Var1, y = Var2, fill = value)) +
+  plot = ggplot2::ggplot(data = corr_matrix_melted, ggplot2::aes(x = Var1, y = Var2, fill = value)) +
     ggplot2::geom_tile(color = "white") +
     ggplot2::scale_fill_gradient2(low = "blue", high = "red", mid = "white",
                                   midpoint = 0, limit = c(-1, 1), space = "Lab",
