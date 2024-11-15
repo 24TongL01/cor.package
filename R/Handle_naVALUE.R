@@ -4,7 +4,8 @@
 #' @param y Second numeric vector
 #' @param method Missing value handling method: "complete", "mean"
 #' @return List of processed vectors
-handle_na <- function(x, y, method = "mean") {
+#' @export
+handle_na = function(x, y, method = "mean") {
   if (method == "complete") {
     # Remove NA pairs
     complete_cases <- complete.cases(x, y)

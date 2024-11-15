@@ -11,6 +11,7 @@
 #' @param y Second numeric vector
 #' @param method Correlation method: "pearson", "spearman", "kendall"
 #' @return Correlation coefficient
+#' @export
 cor_new = function(x, y, method = "pearson", na_handle = "mean") {
   # Ensure input is numeric and has same length
   if (!is.numeric(x) || !is.numeric(y)) stop("Inputs must be numeric")
