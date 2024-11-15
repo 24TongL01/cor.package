@@ -18,7 +18,9 @@ cor_new = function(x, y, method = "pearson", na_handle = "mean") {
   if (length(x) != length(y)) stop("Inputs must have the same length")
 
   # Handle na value
-  handle_na(x, y, method = na_handle)
+  na_result = handle_na(x, y, method = na_handle)
+  x = na_result$x
+  y = na_result$y
 
   # Calculate correlation based on method
   if (method == "pearson") {
@@ -29,7 +31,7 @@ cor_new = function(x, y, method = "pearson", na_handle = "mean") {
     # Spearman correlation
     rank_x = rank(x)
     rank_y = rank(y)
-    return(custom_cor(rank_x, rank_y, method = "pearson"))
+    return(cor_new(rank_x, rank_y, method = "pearson"))
   } else if (method == "kendall") {
     # Kendall correlation
     concordant = 0

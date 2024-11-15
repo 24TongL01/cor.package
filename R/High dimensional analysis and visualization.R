@@ -23,7 +23,6 @@ efficient_corr_matrix = function(data, method = "pearson") {
     }
   }
   diag(corr_matrix) = 1
-  corr_matrix
 
   corr_matrix_melted = reshape2::melt(corr_matrix)
 
@@ -37,4 +36,6 @@ efficient_corr_matrix = function(data, method = "pearson") {
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, vjust = 1, hjust = 1)) +
     ggplot2::labs(x = "Variable 1", y = "Variable 2") +
     ggplot2::coord_fixed()
+
+  return(list(matrix = corr_matrix, plot = plot))
 }
