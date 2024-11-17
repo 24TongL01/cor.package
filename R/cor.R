@@ -60,3 +60,42 @@ cor_new = function(x, y, method = "pearson", na_handle = "mean") {
     stop("Invalid method. Choose 'pearson', 'spearman', or 'kendall'")
   }
 }
+
+
+
+#' Correlation Calculation using Rcpp
+#'
+#' This function calculates correlation coefficients: Pearson, Spearman, or Kendall, using Rcpp for high performance.
+#' @param x First numeric vector
+#' @param y Second numeric vector
+#' @param method Correlation method: "pearson", "spearman", or "kendall"
+#' @param na_handle Method for handling NA values: "mean" or "complete"
+#' @return A numeric value representing the correlation coefficient
+#' @examples
+#' x <- c(1, 2, 3, NA, 5)
+#' y <- c(2, 4, NA, 8, 10)
+#' cor_new_rcpp_wrapper(x, y, method = "pearson", na_handle = "mean")
+#' @export
+cor_new_rcpp_wrapper = function(x, y, method = "pearson", na_handle = "complete") {
+  cor_new_rcpp(x, y, method, na_handle)
+}
+
+## usethis namespace: start
+#' @useDynLib cor.package, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
+## usethis namespace: end
+NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+

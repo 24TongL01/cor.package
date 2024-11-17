@@ -5,11 +5,15 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{cor_pac_guide}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
 ## Introduction
+
 The corr.package provides efficient and flexible tools for:
 
 Calculating correlation coefficients using customizable methods (cor_new).
@@ -25,6 +29,7 @@ knitr::opts_chunk$set(
 ```
 
 ## getting started
+
 ```{r setup}
 library(cor.package)
 if (!requireNamespace("bench", quietly = TRUE)) {
@@ -33,11 +38,11 @@ if (!requireNamespace("bench", quietly = TRUE)) {
 library(bench)
 ```
 
-
-
 ## cor_new(): Flexible Correlation Calculation
+
 The cor_new function allows for custom correlation calculations with options for different methods and handling of missing data.
-```{r example-code, echo = TRUE}
+
+```{r example-code_1, echo = TRUE}
 # Example data
 x = c(1, 2, 3, NA, 5)
 y = c(2, 4, NA, 8, 10)
@@ -52,10 +57,11 @@ cor_new(x, y, method = "spearman", na_handle = "complete")
 cor_new(x, y, method = "kendall")
 ```
 
-
 ## handle_na(): Missing Value Handling
+
 The handle_na function processes missing values in datasets based on user-defined methods.
-```{r example-code, echo = TRUE}
+
+```{r example-code_2, echo = TRUE}
 # Example data
 x = c(1, 2, 3, NA, 5)
 y = c(2, 4, NA, 8, 10)
@@ -68,8 +74,10 @@ handle_na(x, y, method = "mean")
 ```
 
 ## efficient_corr_matrix(): Correlation Matrix Calculation
+
 The efficient_corr_matrix function computes pairwise correlations between columns of a dataset and visualizes them using a heatmap.
-```{r example-code, echo = TRUE}
+
+```{r example-code_3, echo = TRUE}
 # Example: Compute correlation matrix for mtcars dataset
 result = efficient_corr_matrix(mtcars[, 1:5], method = "pearson")
 
@@ -79,40 +87,49 @@ result$matrix
 # Visualize the correlation heatmap
 result$plot
 ```
-##Comparison Against R's cor() Function
-In this section, we compare the cor_new() function with the built-in cor() function to verify both correctness and efficiency.
-```{r example-code, echo = TRUE}
+
+##Comparison Against R's cor() Function In this section, we compare the cor_new() function with the built-in cor() function to verify both correctness and efficiency.
+
+```{r example-code_4, echo = TRUE}
 # Correctness Comparison
 # Example data
 x = c(1, 2, 3, NA, 5)
 y = c(2, 4, NA, 8, 10)
 
 # Pearson correlation with mean imputation
-custom_result <- cor_new(x, y, method = "pearson", na_handle = "complete")
-original_result <- cor(x, y, method = "pearson", use = "complete.obs")
+custom_result = cor_new(x, y, method = "pearson", na_handle = "complete")
+original_result = cor(x, y, method = "pearson", use = "complete.obs")
+rcpp_result = cor_new_rcpp(x_large, y_large, method = "pearson", na_handle = "complete")
 
 # Check if the results are equal
-all.equal(custom_result, original_result)
+all.equal(custom_result, original_result, rcpp_result)
 ```
 
 ## Performance Comparison
-```{r example-code, echo = TRUE}
+
+```{r example-code_5, echo = TRUE}
 # Create a large random dataset for benchmarking
+rm(list = ls())
 set.seed(123)
-x_large = rnorm(1e5)
-y_large = rnorm(1e5)
+x_large = rnorm(3e6)
+y_large = rnorm(3e6)
 # Benchmark the performance of both functions
 benchmark_results = bench::mark(
-  cor_new(x_large, y_large, method = "pearson", na_handle = "mean"),
+  cor_new(x_large, y_large, method = "pearson", na_handle = "complete"),
   cor(x_large, y_large, method = "pearson", use = "complete.obs"),
+  cor_new_rcpp(x_large, y_large, method = "pearson", na_handle = "complete"),
+  iterations = 5,
   check = FALSE  # Avoid checking for equality during benchmarking
 )
 
 # Print benchmarking results
 benchmark_results
 ```
+
 ## Summary
-The corr.package is a powerful tool for exploring and analyzing relationships in data. With its flexible functions, you can:
+
+The corr.package is a powerful tool for exploring and analyzing relationships in data.
+With its flexible functions, you can:
 
 Perform advanced correlation analyses with cor_new.
 Preprocess datasets using handle_na.

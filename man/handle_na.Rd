@@ -5,7 +5,7 @@
 \title{Handle Missing Values
 Fills or removes missing values based on user input}
 \usage{
-handle_na(x, y, method = "mean")
+handle_na(x, y, method)
 }
 \arguments{
 \item{x}{First numeric vector}
