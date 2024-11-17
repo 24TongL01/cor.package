@@ -9,6 +9,11 @@
 #'   \item \code{matrix}: A numeric matrix representing the correlations.
 #'   \item \code{plot}: A ggplot2 object visualizing the correlation heatmap.
 #' }
+#' @examples
+#' # Example with the mtcars dataset
+#' result <- efficient_corr_matrix(mtcars[, 1:5], method = "pearson")
+#' print(result$matrix)
+#' print(result$plot)
 #' @export
 efficient_corr_matrix = function(data, method = "pearson") {
   n = ncol(data)

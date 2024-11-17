@@ -12,6 +12,17 @@
 #' @param method Correlation method: "pearson", "spearman", "kendall"
 #' @param na_handle Method of dealing with NA value: "Complete", "Mean"
 #' @return Correlation coefficient
+#' @examples
+#' # Pearson correlation with mean imputation
+#' x <- c(1, 2, 3, NA, 5)
+#' y <- c(2, 4, NA, 8, 10)
+#' cor_new(x, y, method = "pearson", na_handle = "mean")
+#'
+#' # Spearman correlation with complete case handling
+#' cor_new(x, y, method = "spearman", na_handle = "complete")
+#'
+#' # Kendall correlation
+#' cor_new(x, y, method = "kendall")
 #' @export
 cor_new = function(x, y, method = "pearson", na_handle = "mean") {
   # Ensure input is numeric and has same length

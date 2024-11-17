@@ -23,3 +23,9 @@ A list containing:
 Efficient Correlation Matrix Calculation
 Computes correlation matrix for multiple columns efficiently
 }
+\examples{
+# Example with the mtcars dataset
+result <- efficient_corr_matrix(mtcars[, 1:5], method = "pearson")
+print(result$matrix)
+print(result$plot)
+}

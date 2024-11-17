@@ -4,6 +4,14 @@
 #' @param y Second numeric vector
 #' @param method Missing value handling method: "complete", "mean"
 #' @return List of processed vectors
+#' @examples
+#' # Remove rows with missing values
+#' x <- c(1, 2, 3, NA, 5)
+#' y <- c(2, 4, NA, 8, 10)
+#' handle_na(x, y, method = "complete")
+#'
+#' # Impute missing values with mean
+#' handle_na(x, y, method = "mean")
 #' @export
 handle_na = function(x, y, method = "mean") {
   if (method == "complete") {

@@ -21,3 +21,12 @@ List of processed vectors
 Handle Missing Values
 Fills or removes missing values based on user input
 }
+\examples{
+# Remove rows with missing values
+x <- c(1, 2, 3, NA, 5)
+y <- c(2, 4, NA, 8, 10)
+handle_na(x, y, method = "complete")
+
+# Impute missing values with mean
+handle_na(x, y, method = "mean")
+}

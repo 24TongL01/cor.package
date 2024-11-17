@@ -24,3 +24,15 @@ against R's built-in cor function, with added flexibility and efficiency.
 Correlation Calculation
 Calculates correlation coefficients: Pearson, Spearman, or Kendall
 }
+\examples{
+# Pearson correlation with mean imputation
+x <- c(1, 2, 3, NA, 5)
+y <- c(2, 4, NA, 8, 10)
+cor_new(x, y, method = "pearson", na_handle = "mean")
+
+# Spearman correlation with complete case handling
+cor_new(x, y, method = "spearman", na_handle = "complete")
+
+# Kendall correlation
+cor_new(x, y, method = "kendall")
+}
