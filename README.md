@@ -1,6 +1,4 @@
----
-title: "Correlation Analysis Package"
----
+
 
 # cor.package
 
