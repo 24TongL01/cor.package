@@ -3,7 +3,7 @@ test_that("cor_new works correctly", {
   y = c(2, 4, NA, 8, 10)
 
   # test using pearson method
-  expect_equal(round(cor_new(x, y), 2), 0.94)
+  expect_equal(round(cor_new(x, y, na_handle = "complete"), 2), 1)
 
   # test using spearman method，and handling NA value
   cor_new_ans = cor_new(x, y, method = "spearman", na_handle = "complete")
