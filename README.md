@@ -1,7 +1,5 @@
 ---
 title: "Correlation Analysis Package"
-author: "Tong Liu"
-output: html_document
 ---
 
 # cor.package
