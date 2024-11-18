@@ -5,7 +5,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-List handle_na(NumericVector x, NumericVector y, std::string method) {
+List handle_na_rcpp(NumericVector x, NumericVector y, std::string method) {
   if (method == "complete") {
     // Remove pairs with NA
     LogicalVector complete_cases = (!is_na(x) & !is_na(y));
@@ -46,7 +46,7 @@ double cor_new_rcpp(NumericVector x, NumericVector y, std::string method = "pear
   }
 
   // Handle NA values
-  List handled_data = handle_na(x, y, na_handle);
+  List handled_data = handle_na_rcpp(x, y, na_handle);
   x = handled_data["x"];
   y = handled_data["y"];
 
@@ -54,4 +54,5 @@ double cor_new_rcpp(NumericVector x, NumericVector y, std::string method = "pear
   if (method == "pearson") {
     return pearson_corr(x, y);
   }
+  return 0;
 }

@@ -23,6 +23,6 @@ This function calculates correlation coefficients: Pearson, Spearman, or Kendall
 }
 \examples{
 x <- c(1, 2, 3, NA, 5)
-y <- c(2, 4, NA, 8, 10)
-cor_new_rcpp_wrapper(x, y, method = "pearson", na_handle = "mean")
+y <- c(2, 4, NA, 8, 10000)
+cor_new_rcpp_wrapper(x, y, method = "pearson", na_handle = "complete")
 }
