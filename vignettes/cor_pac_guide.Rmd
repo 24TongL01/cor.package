@@ -19,6 +19,7 @@ The corr.package provides efficient and flexible tools for:
 Calculating correlation coefficients using customizable methods (cor_new).
 Handling missing values in datasets (handle_na).
 Computing and visualizing correlation matrices for high-dimensional data (efficient_corr_matrix).
+Calculating correlation coefficients more efficiently using Rcpp (cor_new_rcpp_wrapper).
 This guide demonstrates how to use these functions through detailed examples and explanations.
 
 ```{r, include = FALSE}
@@ -88,7 +89,9 @@ result$matrix
 result$plot
 ```
 
-##Comparison Against R's cor() Function In this section, we compare the cor_new() function with the built-in cor() function to verify both correctness and efficiency.
+## Correctness test
+
+Comparison Against R's cor() Function In this section, we compare the cor_new() function with the built-in cor() and function under C++ framework to verify both correctness and efficiency.
 
 ```{r example-code_4, echo = TRUE}
 # Correctness Comparison
@@ -125,6 +128,13 @@ benchmark_results = bench::mark(
 # Print benchmarking results
 benchmark_results
 ```
+
+## Interpretation of performance comparison
+
+Three functions were tested for performance: cor_new, cor, and cor_new_rcpp_wrapper.
+Based on the results, the in-built cor function was the fastest, while cor_new_rcpp_wrapper outperformed cor_new significantly but was still slower than the in-built cor function.
+The reason for this difference is that cor_new_rcpp_wrapper, implemented in C++, still relies on loops to calculate correlation coefficients.
+This design choice(choosing to use loops in C++) was made intentionally to facilitate a speed comparison between functions implemented in R and C++.
 
 ## Summary
 
