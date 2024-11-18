@@ -111,8 +111,8 @@ all.equal(custom_result, original_result, rcpp_result)
 # Create a large random dataset for benchmarking
 rm(list = ls())
 set.seed(123)
-x_large = rnorm(1e6)
-y_large = rnorm(1e6)
+x_large = rnorm(1e5)
+y_large = rnorm(1e5)
 # Benchmark the performance of both functions
 benchmark_results = bench::mark(
   cor_new(x_large, y_large, method = "pearson", na_handle = "complete"),
