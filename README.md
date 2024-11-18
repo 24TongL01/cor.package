@@ -4,6 +4,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/24TongL01/cor_package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/24TongL01/cor_package/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **cor.package** is an R package designed for efficiently calculating correlation coefficients and correlation matrices, as well as visualizing the results. It implements custom correlation calculation functions to compare
