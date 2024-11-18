@@ -41,5 +41,6 @@ result = efficient_corr_matrix(data, method = "spearman")
 print(result$plot)
 ## Results Visualization
 Here is the result of plot:
-![Correlation Plot](man/figures/heatplot_example.png)
+![Correlation Plot](https://raw.githubusercontent.com/24TongL01/cor.package/c8363357c420da24aa7dbedc71edfa70f4735c2a/man/figures/heatplot_example.png
+)
 ```
