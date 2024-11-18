@@ -14,7 +14,7 @@ editor_options:
 
 ## Introduction
 
-The corr.package provides efficient and flexible tools for:
+The cor.package provides efficient and flexible tools for:
 
 Calculating correlation coefficients using customizable methods (cor_new).
 Handling missing values in datasets (handle_na).
