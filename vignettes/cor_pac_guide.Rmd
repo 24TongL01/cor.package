@@ -99,7 +99,7 @@ y = c(2, 4, NA, 8, 10)
 # Pearson correlation with mean imputation
 custom_result = cor_new(x, y, method = "pearson", na_handle = "complete")
 original_result = cor(x, y, method = "pearson", use = "complete.obs")
-rcpp_result = cor_new_rcpp(x_large, y_large, method = "pearson", na_handle = "complete")
+rcpp_result = cor_new_rcpp(x, y, method = "pearson", na_handle = "complete")
 
 # Check if the results are equal
 all.equal(custom_result, original_result, rcpp_result)
@@ -111,8 +111,8 @@ all.equal(custom_result, original_result, rcpp_result)
 # Create a large random dataset for benchmarking
 rm(list = ls())
 set.seed(123)
-x_large = rnorm(3e6)
-y_large = rnorm(3e6)
+x_large = rnorm(1e6)
+y_large = rnorm(1e6)
 # Benchmark the performance of both functions
 benchmark_results = bench::mark(
   cor_new(x_large, y_large, method = "pearson", na_handle = "complete"),

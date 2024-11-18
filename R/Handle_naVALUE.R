@@ -6,6 +6,7 @@
 #' @return List of processed vectors
 #' @examples
 #' # Remove rows with missing values
+#' library(cor.package)
 #' x <- c(1, 2, 3, NA, 5)
 #' y <- c(2, 4, NA, 8, 10)
 #' handle_na(x, y, method = "complete")
@@ -20,9 +21,9 @@ handle_na = function(x, y, method = "mean") {
     list(x = x[complete_cases], y = y[complete_cases])
   } else if (method == "mean") {
     # Replace NAs with column mean
-    x[is.na(x)] = mean(x, na.rm = TRUE)
-    y[is.na(y)] = mean(y, na.rm = TRUE)
-    list(x = x, y = y)
+    x[is.na(x)] <- mean(x, na.rm = TRUE)
+    y[is.na(y)] <- mean(y, na.rm = TRUE)
+    return(list(x = x, y = y))
   } else {
     stop("Invalid NA handling method. Choose 'complete' or 'mean'")
   }
