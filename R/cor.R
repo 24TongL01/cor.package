@@ -73,7 +73,7 @@ cor_new = function(x, y, method = "pearson", na_handle = "mean") {
 #' @return A numeric value representing the correlation coefficient
 #' @examples
 #' x <- c(1, 2, 3, NA, 5)
-#' y <- c(2, 4, NA, 8, 10)
+#' y <- c(2, 4, NA, 8, 100)
 #' cor_new_rcpp_wrapper(x, y, method = "pearson", na_handle = "complete")
 #' @export
 cor_new_rcpp_wrapper = function(x, y, method = "pearson", na_handle = "complete") {
