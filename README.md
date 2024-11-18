@@ -7,9 +7,9 @@
 <!-- badges: end -->
 
 **cor.package** is an R package designed for efficiently calculating correlation coefficients and correlation matrices, as well as visualizing the results. It implements custom correlation calculation functions to compare
-against R's built-in cor function, with added flexibility(added process of handling NA value and choices of calculating difference types of correlation coefficients) and efficiency(through Rcpp).
+against R's built-in cor function, with added flexibility(added process of handling NA values and choices of calculating different types of correlation coefficients) and efficiency(through Rcpp).
 
-- **Improvements compared to in-built cor function**: The cor_new function enhances the original cor function by introducing flexible options for handling missing values (NA) with different approaches. Additionally, for high-dimensional calculations, I incorporated a visualization process in the efficient_corr_matrix function, making it easier to interpret results in complex scenarios. Furthermore, I implemented a C++ function using Rcpp to compare the speed differences between functions written in R and C++.
+- **Improvements compared to in-built cor function**: The cor_new function enhances the original cor function by introducing flexible options for handling missing values (NA) with different approaches. Additionally, for high-dimensional calculations, I incorporated a visualization process in the efficient_corr_matrix function, making it easier to interpret results in complex scenarios. Furthermore, I implemented a C++ function using Rcpp to compare the speed differences between function written in R and C++.
 
 ## Function
 
