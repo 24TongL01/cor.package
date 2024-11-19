@@ -7,6 +7,26 @@
 \title{cor.package: A Package for Correlation Analysis}
 \description{
 This package provides functions to calculate correlation efficiently.
+It includes tools for handling missing values, computing Pearson and Spearman correlations,
+and visualizing correlation matrices.
+}
+\details{
+\subsection{Main Functions}{
+\itemize{
+\item \code{cor_function()}: Computes the correlation between two numeric vectors.
+\item \code{handle_na()}: Handles missing values in numeric datasets.
+}
+}
+
+\subsection{Example}{
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{library(cor.package)
+x <- c(1, 2, 3, NA, 5)
+y <- c(5, 4, NA, 2, 1)
+handle_na(x, y, method = "omit")
+cor_function(x, y)
+}\if{html}{\out{</div>}}
+}
 }
 \author{
 \strong{Maintainer}: Tong Liu \email{liutong.csu@gmail.com}
