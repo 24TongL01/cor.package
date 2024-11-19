@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Tong Liu" />
+
+<meta name="date" content="2024-11-19" />
+
+<title>cor_pac_guide</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">cor_pac_guide</h1>
+<h4 class="author">Tong Liu</h4>
+<h4 class="date">2024-11-19</h4>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The cor.package provides efficient and flexible tools for:</p>
+<p>Calculating correlation coefficients using customizable methods
+(cor_new). Handling missing values in datasets (handle_na). Computing
+and visualizing correlation matrices for high-dimensional data
+(efficient_corr_matrix). Calculating correlation coefficients more
+efficiently using Rcpp (cor_new_rcpp_wrapper). This guide demonstrates
+how to use these functions through detailed examples and
+explanations.</p>
+</div>
+<div id="getting-started" class="section level2">
+<h2>getting started</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(cor.package)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;bench&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;The &#39;bench&#39; package is required for this vignette. Please install it with install.packages(&#39;bench&#39;).&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>}</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">library</span>(bench)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;bench&#39; was built under R version 4.4.2</span></span></code></pre></div>
+</div>
+<div id="cor_new-flexible-correlation-calculation" class="section level2">
+<h2>cor_new(): Flexible Correlation Calculation</h2>
+<p>The cor_new function allows for custom correlation calculations with
+options for different methods and handling of missing data.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Example data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Pearson correlation with mean imputation</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">cor_new</span>(x, y, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">na_handle =</span> <span class="st">&quot;mean&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; [1] 0.9354143</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Spearman correlation with complete case handling</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">cor_new</span>(x, y, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>, <span class="at">na_handle =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># Kendall correlation</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="fu">cor_new</span>(x, y, <span class="at">method =</span> <span class="st">&quot;kendall&quot;</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; [1] 0.1</span></span></code></pre></div>
+</div>
+<div id="handle_na-missing-value-handling" class="section level2">
+<h2>handle_na(): Missing Value Handling</h2>
+<p>The handle_na function processes missing values in datasets based on
+user-defined methods.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Example data</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># Remove rows with missing values</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">handle_na</span>(x, y, <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; $x</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 5</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; $y</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; [1]  2  4 10</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co"># Impute missing values with the mean</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="fu">handle_na</span>(x, y, <span class="at">method =</span> <span class="st">&quot;mean&quot;</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; $x</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; [1] 1.00 2.00 3.00 2.75 5.00</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt; $y</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#&gt; [1]  2  4  6  8 10</span></span></code></pre></div>
+</div>
+<div id="efficient_corr_matrix-correlation-matrix-calculation" class="section level2">
+<h2>efficient_corr_matrix(): Correlation Matrix Calculation</h2>
+<p>The efficient_corr_matrix function computes pairwise correlations
+between columns of a dataset and visualizes them using a heatmap.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Example: Compute correlation matrix for mtcars dataset</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">efficient_corr_matrix</span>(mtcars[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Print the correlation matrix</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>result<span class="sc">$</span>matrix</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;             mpg        cyl       disp         hp       drat</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; mpg   1.0000000 -0.8521620 -0.8475514 -0.7761684  0.6811719</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; cyl  -0.8521620  1.0000000  0.9020329  0.8324475 -0.6999381</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; disp -0.8475514  0.9020329  1.0000000  0.7909486 -0.7102139</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; hp   -0.7761684  0.8324475  0.7909486  1.0000000 -0.4487591</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; drat  0.6811719 -0.6999381 -0.7102139 -0.4487591  1.0000000</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># Visualize the correlation heatmap</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>result<span class="sc">$</span>plot</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAACo1BMVEUAAAAAADoAAGYAOpAAZrYbCv8sE/84Gv86AAA6ADo6AGY6Ojo6OpA6kNtBIf9JJv9NTU1NTW5NTY5Nbo5NbqtNjqtNjshQK/9XMf9dNf9hOP9jOf9jOv9mAABmADpmAGZmOpBmZrZmtv9oPv9uQ/9uTU1uTW5uTY5ubm5ubo5ubqtujshuq6tuq8huq+RzR/93S/98T/+AVP+FWP+IW/+JXP+KXf+NYP+OTU2OTW6OTY6Obk2Obm6ObquOjk2Ojm6Ojo6OjsiOyMiOyP+QOgCQOjqQOmaQkDqQkGaQtpCQ27aQ2/+RZP+UaP+YbP+ccP+gdP+jeP+nfP+pgP+rbk2rbm6rbo6rjqurq26rq46rq8ir5Mir5OSr5P+thP+wiP+zjP+2ZgC225C22/+2//+3kP+5lP+8l/+9mP/AnP/CoP/GpP/Ijk3Ijm7IqP/Iq47Iq6vIyI7IyOTI5P/I/+TI///LrP/OsP/RtP/UuP/XvP/ZwP/bkDrb/7bb/9vb///cxP/eyP/hzP/kq27kq47kyI7k0P/k5Kvk5OTk5P/k///m1P/p2P/r3P/r6+vt4P/w5P/y6P/17f/38f/59f/8+f/+/f//AAD/EgX/Hwz/KRP/MRj/OB3/PSH/PiL/RCf/Siv/Ti//UjP/UzP/WDf/XTz/YUD/ZUT/akj/bUz/clH/dlT/eFb/elj/fV3/gWH/hWX/iWn/jG3/kHH/lHX/l3r/m37/noL/oob/pYr/qY//rZP/sJf/tJz/tmb/t6D/uqT/vqj/waz/xbH/yI7/yKv/yLX/y7n/z77/0sP/1cf/2cv/25D/27b/29v/3M//39T/49n/5Kv/5Mj/5t3/6uL/7eb/8Ov/8+//9/T/+vj//fz//7b//8j//9v//+T///+P2uZZAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAOkUlEQVR4nO2dh38jRxXHf74z4AsYlONi6gUwOEcCMS2A0yBgQxodXyABAwpHd4BAjmpIwAGCgaP3XkLvvYqmUE0A0cG29k9h3uyutuitbrUz0nuS7/s5+7S7s+M338/sbJmdEYIT9ATSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gFoB9IBaAfSAWgH0gF4ZQ3AxKW9UmzuSzb/6dmZRR54CEsLO0t7ryVJsz3SpIwcXw4B57D0UCc/xlD4H4+YoGN+1vebTZqtg0nV2VkCJo2Dky7Enivp1xFas+eItbI5ZY7Eafo9TYtx2n0XmzVdtQ8l/nIZFAhK1YidpUn7szlFJadftER1yySyItf2HLGu9l2apDU1z6zO5YoSf7kMGgSd1Clcg8ppfm1OzZKg2WiNUWOM3ExHoPk/EpRN23XYocRfHhFShWtQMxQ5CNfT+Q3RMRU07MkuFtSVNgNcQvoqT/AQnuAsluB5PMEHeYqiidugrVOZQscttz3EJi5N16BdIyiWYNqRBl0MNcJmJix0I7o8io00khrUlXZsBSXXQZ2Gt1Nouy20QkY2pyZsY51upMdfkLkSiq+kO6fuTqFpTXhoUaqJS4ydOiYzp/ldIGgAwGXnE4KOwwlBx+GEIKK9vJhaah06miycEESMj6D4XmTrIHrd8GdB783bC7Xbn7vYOv3c/Udbc7XaolnenxgaLUENhHeiO0uzwdpk2b3Qe/PqfNCsLbbmFoPts1eo+iQ16NgxKUFl7ly7qU9cHNagrbsdSd/YOgnaPucoHWKxFbOo/BDrmTKysnmba+l+zYsgq2M1ErRaM4eXYkEf4ukSRPdivgSlatD2wmL2EFMn6MM8XYJ81qC4DTJW7M9pK4oFfYSnS5DPNshUH3sWIyvrNfrYXlZ7FvsoT5egnaVpf2ex3ugS9DGeJAEJoh+f10GjJOgTPC4FDMZK0Cd5XAoYjJWgT/G4FDAYK0Gf5nEpYDBW3T6f5XHMFS47358n+AxPcCNLYU0pqlkFfI7HpYDBWAnic7/RpYDBWAn6PI9LAYOxEvQFHpcCBhlBdYRPlBpdbzgUoUvQF3mc9KQF0etHDcyOrqAv8fgSFHb9bx2cHFlBX+bxK4h6qUdV0Fd43PzkDrHAPvLvEpR5CKRW0Nd4vAkK6uEbIjtLIyro6zz+BBXTOvSwWm0x2D7nqbWTV9QK+gbPUATNzQfNAxvbCwc2mvtT3T5Cggq6fb7JMxRB4TNpem7fPpyqQrpq0Ld4hino7BXqBNIq6Ns8QxakuAZ9hyfenDyJpjdeS1/K9CVoYYaaIq2CvssTbU31yNd7DeboLci4nWWGOnRq0MM1n8W+xxNtTXrDdh5VttOwS1B97+sOztqX9llsG5RGlyDi+xnSW5L+VHOsMWMyyggydxt0w1F4q6Fc0A94oq1Jj7x9s7V0LepHUBe6BP2QJ9qa65Ev3Q6lBQVrdIhtHZwuua8yQT/iibbmeuSrCbKjPFDajzJBP+aJtiY98nSw7Tza62l+NAT9hCfeHF4HUSVaO97AVm+CdPFTHsdcEX+wJ7+Q0o30XXiCj/MUVJXC/hq+I/asomh+xuNLUBV0Cfo5j0sBg7ES9AselwIG7Fms/J2KLkG/5KmsJgTphbVw5Gvp87wuQb/icZBDIPU56tgofyWtS9CveRzkEEh9HnFBv+FxkEMgvRAPLi+7sy5Bv+VxkEMg/sBfB6XGIagX9DseX4J4smOh8ugS9Hueal46oMe2aCyUqUFNGqbR3S+mS9AfeHwKstOiJIdYZxwCDdlYnwm6+sWEBBX0i/2Rx6OgnaXpnaXZTiOdjGSJHiV29YvpqkF/5vEoiNTUp8OZQYLMWKjWHB1bXf1iugT9hcezoLXk/aDsaDrqes73i+kS9Fcej4KCurXT6ffptEHUGWb75nP9YroE/Z3HpyB6LFlPnrYlY6FWw7NYvl9Ml6B/8PgUdBy6un10CfonTzUvHdBHWuWC/sVTzUsHxB9sp9hIP3L9N09SwPjlheENqNMl6D880dbk5YXqEwvQniMs6L880dak47D6oN4+HnRoFET8L0N6S9L17DAsvOckn+r5AE+0NXl5ofrEAn030nfmKewqLahYRR2xRQMXC3g/T7TVSw3qF12C3scTbfXRBo24oPfyRFuTlxccJhbIPQ8aMUHv4Yk3Jy8vVL4Oyj0PGjVB7+YpW5gCkPqcex50fHQJehePk56ez4OOjy5B7+Rx0tP7eRBHphNIl6B38PgUlHseNGKC3s7jU1Ah2wu1k1dWF4PWGW/RK+htPL4Ebd2jOBF1HzYPvGk+aM5nZsETElTQ7fNmHm+CmKGYMaGV7fM3rlpRfIi9kceXoPBWjL8Eap1BT+rbh592/oZiQW/g8ScosINZuLenIivrF8xrbqSv4/EqqOBxJLVBNEXgaSuaBb2Wx7OggH2Byp7FgvZlRzULeg2PZ0G9buRa98mt0CXo1TwudoKSbVDI+sm5Xh9lgl7F42InKHkWK0KXoFfyVDUTgfiD0VN+hEeELkGv4KlqJgLxh6279//AXpegF/NU89IBLjvrEvQiHpcCBmM1HOqFPI65wmXnoppSVLMK+hmLxuUVzWNZwAt4XAoYjJWg5/Okk1SYfWGMBD2XJ5WiyuwLqK5Hm6Dn8KRSVJl9YYwEEc/KkN9aZfYFVDIToUvQM3lSKarMvjBGgp7BE22tA5NVZl8YI0FP5kmlqDL7Ahz8KBP0JJ5UiiqzL4yRoCfypJNUmH2hWFD78OW12nzT/HTGQdH4qPNSD4V0CXoCTxkL1QQtzwStuZlwbq5wHBSNTeg8NTt2TEpQQb/Y43kGJ+hwOHRl++yVaByUHd1yWG0NehzPUASF46Coe0yxoMfyDEuQ/hr0GJ6hCIrGQWXaIHWCHsozFEHROChzFjtFbw16MM/ABKVIDfPJdBzqEvQgHgc5BMokigS1l2vZAXW6BD2Qx83POF1JP4DHpYDBWAkqysYNuOysS9D9eFwKGIyVoHvxuBQwGKt+sXvyOOYKH6EZir5euM/1/WaT5q48JfbsBRz3V8SdeBxzhY/QdHBHHsdc4SM0HdyBxzFX+AhNB7fjccwVPkLTwW15soniTo3Sg+rgO0w5bsWTSdOI3lgoP7kA/AcqxS150knqExf3+43hGESoctwiA5Og7++ch9f49BMJKj+5AAYbT3BT/t3qirRf5pgB9c0H+mpQe7nr7fNqtObOPOwjp025Nqhg0s6mJ0PbC2e+1UM2kZXykwvAwx+10PNYzhBfh7YXarUZJnXR+iBYf+TCvFOAISSor8kF4OGPEnbE1BxjqL18b8bQVSu2a7v0emLbi6F+gad87PSBrKHWoavzhtrLNOEpdWiXW28r1qL5fUrPuXcHAjzlY7uDzGGWLUD7Clu3mvnV19sV6/kaUbieBhVbQzM3eIq3NPCQh204Vmdo7s6r92cmn16v1Q5sZOamJIxHe9ilZz1tLtpsLsivDzfOUNZsEzdw4CEP23CcYhrp2nym696UeP/RVZqsMpPcHkLNWqY1prq3StXkglpXK92+onXomuVFk6SgcRoocM6h03C0n7KR6XiNz/vNWqcKNaMjiE55uQrRpLk+raFcRbH5mzpEA0IFgHMOqYbj+svTpbODyeMe/jDpMqlap0rSXs6bCBuqrKGbaOfTjZj1AxtdLdNwgIc8mlHD0Tov09pE7fZ80uretGJrlSktSctfQsZNebKerqH+9hJaLXR8Be6CTDuzmG9QYlbJlxEXD3Y15X16WN1uCFaZ9PmTXRDKYlYPEbjtHp3D+TLYliYjwpSXkrbmauzx0pWNyUHaENx2335EeHlYUAZ6Jy2FLW8fxbXXP8KG4LKzPY9Hhkrck0blLV9cewXl6263InDZeXUxPC/1+G6SNH2XN8x3VdQQqu9qL1BCQ+Xov7zUzLcvu8bHc46qoPqu4QVQP4b6Lq9ptO67IHR+j4DLzrY1ab/05WXTVyhv1yzowwZOe/d9ehEvb9/AbXfZi7hhAOkAtAPpALQD6QC0A+kAtAPpALQD6QC0A+kAtAPpALSDwWS7sxR2fOf6v2lGiNzH1KqI8l/pMAwwoHzt10b3+jKcYkH1viebGyQYUL5huXu8YVIkqMpsfIMEg8q4TjNW0hFmv4ti2ri6EHuuNDbi5X0XwU6DQPOwLCXTQTUmu+uUJBhUxnZ2DHOE2W+hMAfc5tSkrS7J8t5rqaUyq2yDlcykv0sEUVNLR9jNVG5T5s2pWft/ftn8y30H9y4RRMdYNNMKaCIRW2z7K1o+KbRiVq2F37kUzyK7WwQ19r6ezmFbB02bG9aU6BCLllOCsu967RZBW6fal7bt97w0khqUX6ZV2dPWbhEU1G9NRxiVfnMqJSheTjfSRlpiadcIaoTTzNVNi3OJPZTCsneWL7JvLsen+Ymua2wdQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO1AOgDtQDoA7UA6AO38H9cUaf9xuQi5AAAAAElFTkSuQmCC" /><!-- --></p>
+</div>
+<div id="correctness-test" class="section level2">
+<h2>Correctness test</h2>
+<p>Comparison Against R’s cor() Function In this section, we compare the
+cor_new() function with the built-in cor() and function under C++
+framework to verify both correctness and efficiency.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Correctness Comparison</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Example data</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Pearson correlation with mean imputation</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>custom_result <span class="ot">=</span> <span class="fu">cor_new</span>(x, y, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">na_handle =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>original_result <span class="ot">=</span> <span class="fu">cor</span>(x, y, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>rcpp_result <span class="ot">=</span> <span class="fu">cor_new_rcpp_wrapper</span>(x, y, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">na_handle =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co"># Check if the results are equal</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="fu">all.equal</span>(custom_result, original_result, rcpp_result)</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+</div>
+<div id="performance-comparison" class="section level2">
+<h2>Performance Comparison</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Create a large random dataset for benchmarking</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>x_large <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="fl">1e5</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>y_large <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="fl">1e5</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># Benchmark the performance of both functions</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>benchmark_results <span class="ot">=</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  <span class="fu">cor_new</span>(x_large, y_large, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">na_handle =</span> <span class="st">&quot;complete&quot;</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>  <span class="fu">cor</span>(x_large, y_large, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">use =</span> <span class="st">&quot;complete.obs&quot;</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>  <span class="fu">cor_new_rcpp_wrapper</span>(x_large, y_large, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>, <span class="at">na_handle =</span> <span class="st">&quot;complete&quot;</span>),</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  <span class="at">iterations =</span> <span class="dv">5</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>  <span class="at">check =</span> <span class="cn">FALSE</span>  <span class="co"># Avoid checking for equality during benchmarking</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co"># Print benchmarking results</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>benchmark_results</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 6</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">#&gt;   expression                             min median `itr/sec` mem_alloc `gc/sec`</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt;   &lt;bch:expr&gt;                         &lt;bch:t&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; 1 &quot;cor_new(x_large, y_large, method… 11.03ms 12.4ms      83.2    6.49MB      0  </span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; 2 &quot;cor(x_large, y_large, method = \…  3.27ms  4.2ms     223.   390.67KB      0  </span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; 3 &quot;cor_new_rcpp_wrapper(x_large, y_… 16.25ms 17.2ms      51.5    1.91MB     12.9</span></span></code></pre></div>
+</div>
+<div id="interpretation-of-performance-comparison" class="section level2">
+<h2>Interpretation of performance comparison</h2>
+<p>Three functions were tested for performance: cor_new, cor, and
+cor_new_rcpp_wrapper. Based on the results, the in-built cor function
+was the fastest, while cor_new_rcpp_wrapper outperformed cor_new
+significantly but was still slower than the in-built cor function. The
+reason for this difference is that cor_new_rcpp_wrapper, implemented in
+C++, still relies on loops to calculate correlation coefficients. This
+design choice(choosing to use loops in C++) was made intentionally to
+facilitate a speed comparison between functions implemented in R and
+C++.</p>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>The corr.package is a powerful tool for exploring and analyzing
+relationships in data. With its flexible functions, you can:</p>
+<p>Perform advanced correlation analyses with cor_new. Preprocess
+datasets using handle_na. Efficiently compute and visualize
+high-dimensional correlation matrices with efficient_corr_matrix. For
+further information, please refer to the package documentation or help
+files.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
