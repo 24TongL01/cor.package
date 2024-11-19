@@ -49,10 +49,19 @@ y = c(2, 4, NA, 8, 10)
 # Calculate Pearson correlation coefficient
 cor_new(x, y, method = "pearson", na_handle = "mean")
 
+# Remove rows with missing values
+handle_na(x, y, method = "complete")
+
+# Impute missing values with the mean
+handle_na(x, y, method = "mean")
+
 # Generate correlation matrix and heatmap
 data = mtcars[, 1:5]
 result = efficient_corr_matrix(data, method = "spearman")
 print(result$plot)
+
+# Calculating coefficients using C++
+cor_new_rcpp_wrapper(x, y, method = "pearson", na_handle = "complete")
 
 ```
 ## Documentation
