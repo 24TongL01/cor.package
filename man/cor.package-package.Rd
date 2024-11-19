@@ -7,12 +7,12 @@
 \title{cor.package: A Package for Correlation Analysis}
 \description{
 The cor.package provides efficient and flexible tools for:
-Calculating correlation coefficients using customizable methods (cor_new).
-Handling missing values in datasets (handle_na).
-Computing and visualizing correlation matrices for high-dimensional data (efficient_corr_matrix).
-Calculating correlation coefficients more efficiently using Rcpp (cor_new_rcpp_wrapper).
+\itemize{
+\item Calculating correlation coefficients using customizable methods (cor_new).
+\item Handling missing values in datasets (handle_na).
+\item Computing and visualizing correlation matrices for high-dimensional data (efficient_corr_matrix).
+\item Calculating correlation coefficients more efficiently using Rcpp (cor_new_rcpp_wrapper).
 }
-\details{
 \subsection{Main Functions}{
 \itemize{
 \item \code{cor_new()}: Computes the correlation between two numeric vectors.
@@ -21,9 +21,8 @@ Calculating correlation coefficients more efficiently using Rcpp (cor_new_rcpp_w
 \item \code{cor_new_rcpp_wrapper()}: Realizing cor_new() using C++.
 }
 }
-
-\subsection{Example}{
-
+}
+\examples{
 library(cor.package)
 x = c(1, 2, 3, NA, 5)
 y = c(2, 4, NA, 8, 10)
@@ -33,7 +32,8 @@ cor_new(x, y, method = "pearson", na_handle = "mean")
 cor_new(x, y, method = "spearman", na_handle = "complete")
 #Kendall correlation
 cor_new(x, y, method = "kendall")
-}
+
+
 }
 \author{
 \strong{Maintainer}: Tong Liu \email{liutong.csu@gmail.com}
