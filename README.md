@@ -12,8 +12,13 @@ against R's built-in cor function, with added flexibility(added process of handl
 
 - **Improvements compared to in-built cor function**: The cor_new function enhances the original cor function by introducing flexible options for handling missing values (NA) with different approaches. Additionally, for high-dimensional calculations, I incorporated a visualization process in the efficient_corr_matrix function, making it easier to interpret results in complex scenarios. Furthermore, I implemented a C++ function using Rcpp to compare the speed differences between function written in R and C++.
 
-## Function
+## Key Features
+- **Flexible missing value handling**: Easily handle NA values with mean imputation or complete case analysis.
+- **Custom correlation calculation**: Calculate Pearson, Spearman, and Kendall coefficients with optimized algorithms.
+- **High-dimensional support**: Compute and visualize correlation matrices for high-dimensional datasets with heatmaps.
+- **Improved performance**: Leverage C++ for faster computation with the `cor_new_rcpp_wrapper` function.
 
+## Function
 - **cor_new**: Computes three types of correlation coefficients: Pearson, Spearman, and Kendall which are at vector levels.
 - **cor_new_rcpp_wrapper**: Computes three types of correlation coefficients under the frame of C++.
 - **handle_na**: Provides flexible missing value handling methods, including mean imputation and complete case analysis.
@@ -50,3 +55,16 @@ result = efficient_corr_matrix(data, method = "spearman")
 print(result$plot)
 
 ```
+## Documentation
+
+For detailed documentation and vignettes, check the official GitHub page.
+
+## License
+
+This project is licensed under the [GNU General Public License Version 3 (GPL-3.0)](LICENSE).
+
+By using, modifying, or distributing this software, you agree to the terms and conditions of the GPL-3.0. For more details, see the [full license text](https://www.gnu.org/licenses/gpl-3.0.html).
+
+
+## Issues and Contributions
+If you encounter any issues or have suggestions for improvement, please open an issue on GitHub. Contributions are welcome!
