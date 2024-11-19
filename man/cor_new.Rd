@@ -2,7 +2,8 @@
 % Please edit documentation in R/cor.R
 \name{cor_new}
 \alias{cor_new}
-\title{New Correlation Package}
+\title{Correlation Calculation
+Calculates correlation coefficients: Pearson, Spearman, or Kendall}
 \usage{
 cor_new(x, y, method = "pearson", na_handle = "mean")
 }
@@ -19,8 +20,6 @@ cor_new(x, y, method = "pearson", na_handle = "mean")
 Correlation coefficient
 }
 \description{
-This package implements custom correlation calculation functions to compare
-against R's built-in cor function, with added flexibility and efficiency.
 Correlation Calculation
 Calculates correlation coefficients: Pearson, Spearman, or Kendall
 }

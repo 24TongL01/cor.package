@@ -1,7 +1,8 @@
-#' New Correlation Package
-#'
-#' This package implements custom correlation calculation functions to compare
-#' against R's built-in cor function, with added flexibility and efficiency.
+## usethis namespace: start
+#' @useDynLib cor.package, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
+## usethis namespace: end
+NULL
 
 
 
@@ -80,11 +81,7 @@ cor_new_rcpp_wrapper = function(x, y, method = "pearson", na_handle = "complete"
   cor_new_rcpp(x, y, method, na_handle)
 }
 
-## usethis namespace: start
-#' @useDynLib cor.package, .registration = TRUE
-#' @importFrom Rcpp sourceCpp
-## usethis namespace: end
-NULL
+
 
 
 

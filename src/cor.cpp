@@ -41,9 +41,9 @@ double pearson_corr(NumericVector x, NumericVector y) {
 // [[Rcpp::export]]
 double cor_new_rcpp(NumericVector x, NumericVector y, std::string method = "pearson", std::string na_handle = "complete") {
   // Ensure input vectors have the same length
-  if (x.size() != y.size()) {
-    stop("Input vectors must have the same length.");
-  }
+  //if (x.size() != y.size()) {
+  //  stop("Input vectors must have the same length.");
+  //}
 
   // Handle NA values
   List handled_data = handle_na_rcpp(x, y, na_handle);
@@ -54,5 +54,5 @@ double cor_new_rcpp(NumericVector x, NumericVector y, std::string method = "pear
   if (method == "pearson") {
     return pearson_corr(x, y);
   }
-  return 0;
+  //return 0;
 }
