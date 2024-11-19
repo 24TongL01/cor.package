@@ -1,8 +1,9 @@
 ## usethis namespace: start
-#' @useDynLib cor.package, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
+#' @useDynLib cor.package, .registration = TRUE
 ## usethis namespace: end
 NULL
+
 
 
 
