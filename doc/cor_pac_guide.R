@@ -68,9 +68,9 @@ x_large = rnorm(1e5)
 y_large = rnorm(1e5)
 # Benchmark the performance of both functions
 benchmark_results = bench::mark(
-  cor_new(x_large, y_large, method = "pearson", na_handle = "complete"),
-  cor(x_large, y_large, method = "pearson", use = "complete.obs"),
-  cor_new_rcpp_wrapper(x_large, y_large, method = "pearson", na_handle = "complete"),
+  `cor_new (R)` = cor_new(x_large, y_large, method = "pearson", na_handle = "complete"),
+  `cor (base R)` = cor(x_large, y_large, method = "pearson", use = "complete.obs"),
+  `cor_new_rcpp_wrapper (C++)` = cor_new_rcpp_wrapper(x_large, y_large, method = "pearson", na_handle = "complete"),
   iterations = 5,
   check = FALSE  # Avoid checking for equality during benchmarking
 )
