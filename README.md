@@ -26,7 +26,8 @@ You can install the development version of **cor.package** from [GitHub](https:/
 
 ``` r
 # install.packages("pak")
-pak::pak("24TongL01/cor_package")
+install.packages("devtools")
+devtools::install_github("24TongL01/cor.package")
 ```
 
 ## Dataset
