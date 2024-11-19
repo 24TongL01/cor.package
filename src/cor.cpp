@@ -54,5 +54,5 @@ double cor_new_rcpp(NumericVector x, NumericVector y, std::string method = "pear
   if (method == "pearson") {
     return pearson_corr(x, y);
   }
-  //return 0;
+  return 0;
 }
