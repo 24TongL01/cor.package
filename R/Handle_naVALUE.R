@@ -24,7 +24,7 @@ handle_na = function(x, y, method = "mean") {
     x[is.na(x)] <- mean(x, na.rm = TRUE)
     y[is.na(y)] <- mean(y, na.rm = TRUE)
     return(list(x = x, y = y))
-  } else {
-    stop("Invalid NA handling method. Choose 'complete' or 'mean'")
-  }
+  } #else {
+    #stop("Invalid NA handling method. Choose 'complete' or 'mean'")
+  #}
 }

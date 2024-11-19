@@ -26,8 +26,8 @@
 #' @export
 cor_new = function(x, y, method = "pearson", na_handle = "mean") {
   # Ensure input is numeric and has same length
-  if (!is.numeric(x) || !is.numeric(y)) stop("Inputs must be numeric")
-  if (length(x) != length(y)) stop("Inputs must have the same length")
+  #if (!is.numeric(x) || !is.numeric(y)) stop("Inputs must be numeric")
+  #if (length(x) != length(y)) stop("Inputs must have the same length")
 
   # Handle na value
   na_result = handle_na(x, y, method = na_handle)
@@ -56,9 +56,9 @@ cor_new = function(x, y, method = "pearson", na_handle = "mean") {
       }
     }
     return((concordant - discordant) / (0.5 * n * (n - 1)))
-  } else {
-    stop("Invalid method. Choose 'pearson', 'spearman', or 'kendall'")
-  }
+  } #else {
+    #stop("Invalid method. Choose 'pearson', 'spearman', or 'kendall'")
+  #}
 }
 
 

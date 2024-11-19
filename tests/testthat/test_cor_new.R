@@ -15,3 +15,19 @@ test_that("cor_new works correctly", {
 })
 
 
+test_that("cor_new_rcpp computes Pearson correlation with complete case handling", {
+  # Input vectors
+  x = c(1, 2, 3, NA, 5)
+  y = c(2, 4, NA, 8, 10)
+
+  # Directly call the Rcpp function
+  result = cor_new_rcpp(x, y, method = "pearson", na_handle = "complete")
+
+  # Expected result using base R cor function
+  expected = cor(c(1, 2, 5), c(2, 4, 10), method = "pearson")
+
+  # Verify the result matches the expected value
+  expect_equal(result, expected)
+})
+
+
