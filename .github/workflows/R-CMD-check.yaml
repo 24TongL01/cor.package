@@ -25,9 +25,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages("remotes")
-          remotes::install_cran("rcmdcheck")
-          remotes::install_deps(dependencies = TRUE)
+          Rscript -e 'install.packages("remotes")'
+          Rscript -e 'remotes::install_cran("rcmdcheck")'
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
 
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
